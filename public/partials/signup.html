@@ -1,0 +1,8 @@
+<div ng-controller='authController'> 
+<form class='form-auth'>
+	<input type='textbox' name='Username' ng-model='user.username'  placeholder='Username' class='form-control'><br>
+	 {{error_message}}
+	<input type='password' name='Password' ng-model='user.password' placeholder='password' class='form-control'><br>
+	<input type='submit' class='btn btn-success btn-block' ng-click='signup()' value='Sign up'>
+</form>
+</div>

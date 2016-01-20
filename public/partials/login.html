@@ -1,0 +1,13 @@
+<div class='wrapper'ng-controller='authController'> 
+<form class='form-auth col-offset-12'>
+	<input type='textbox' name='Username' ng-model='user.username'  placeholder='Username' class='form-control'><br>
+	 {{error_message}}
+	<input type='password' name='Password' ng-model='user.password' placeholder='password' class='form-control'><br>
+	<input type='submit' class='btn btn-block btn-danger pull-right' ng-submit ng-click='login()' value='Log In' >
+</form>
+
+</div>
+
+
+<div id='sign' class='pull-right'><br><br>Didn't Signed up yet?<br><a href="#/signup"><input  type='button'
+	class='btn btn-success btn-sm pull-right' value='Sign up'></a></div>

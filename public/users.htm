@@ -1,0 +1,19 @@
+<div ng-controller='UserController' class='container'>
+	<div class='col-md-offset col-md-8'>
+		<div  ng-repeat='User in users |orderBy :"created_at":true 'ng-class-even="'even'" ng-class-odd="'odd'"> <div> <a href="#/users/{{User._id}}"><h4>{{User.Name.Firstname}} {{User.Name.Lastname}}<h4></a>
+					
+					<div>
+						<span>{{User.Address }}</span>
+						<span>{{User.Age }}</span>
+						<span>{{User.Gender }}</span>
+						<span>{{User.Marritualstatus }}</span>
+						<span>{{User.City }}</span>
+						<span>{{User.Interestedin}}</span>
+				 </div>
+						 	
+						 		
+                        </div>
+                         
+                </div>
+          </div>
+</div>

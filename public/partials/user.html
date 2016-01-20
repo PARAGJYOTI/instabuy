@@ -1,0 +1,24 @@
+<div ng-controller='userGetCtrl'>
+ <div  class='container'>
+	<div class='col-md-offset col-md-8'>
+		<div class='indi'>
+		<h4>USERNAME : {{User.Name.Firstname}} {{User.Name.Lastname}}<h4>
+					
+					<div>
+						<div>ADDRESS: <span>{{User.Address }}</span></div>
+						<div>AGE: <span>{{User.Age }}</span></div>
+						<div>GENDER:<span>{{User.Gender }}</span></div>
+						<div>MARRITUAL STATUS:<span>{{User.Marritualstatus }}</span></div>
+						<div>City: <span>{{User.City}}</span></div>
+						<div>Interested In:<span>{{User.Interestedin}}</span></div>
+						<div>Shipping Address<span>{{User.ShippingAddress}}</span></div>
+						<div>ShoppingInterest<span>{{User.ShoppingInterest}}</span></div>
+						<div>Followings<a href='#/users/{{User.Followings[0]}}'<span>{{User.Followings[0]}}</span></a></div>
+				 	</div>
+						 	
+						 		
+       </div>
+                         
+</div>
+</div>
+</div>

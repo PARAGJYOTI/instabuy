@@ -1,0 +1,21 @@
+<div  ng-controller='postController' class='row'>
+		<div  class='col-md-offset'>
+				<div >
+
+							 <textarea rows='4' class='form-control' placeholder='Tell your Story!' ng-model='text'></textarea>
+								<input type='submit'value='Post'  class='btn submit-btn btn-primery pull-right' ng-click='post()'></br><small class="pull-right">Remaining Characters:{{remaining()}}</small></br></br>
+				</div> 
+						    
+						    
+						        
+					
+				 <div class='post col-md-8' ng-repeat='post in posts |orderBy :"created_at":true 'ng-class-even="'even'" ng-class-odd="'odd'"> <div> <a href="#/posts/{{post._id}}"><h4>{{post.text}}<h4></a>
+							<small>posted by
+						    	        @ {{post.created_by}}</small>
+						    <p class='pull-right'>created at :{{post.created_at}} </p>
+						 		
+                        </div>
+                         
+                </div>
+</div>
+</div>
