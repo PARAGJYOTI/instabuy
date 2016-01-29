@@ -8,10 +8,10 @@
 						    
 						    
 						        
-					
+					<div>logged in as <a href="#/users/{{current_userid}}">{{current_user}}<a></div>
 				 <div class='post col-md-8' ng-repeat='post in posts |orderBy :"created_at":true 'ng-class-even="'even'" ng-class-odd="'odd'"> <div> <a href="#/posts/{{post._id}}"><h4>{{post.text}}<h4></a>
 							<small>posted by
-						    	        @ {{post.created_by}}</small>
+						    	       <a href='#/users/{{post.created_by}}' >@ {{post.created_by}}</a></small>
 						    <p class='pull-right'>created at :{{post.created_at}} </p>
 						 		
                         </div>

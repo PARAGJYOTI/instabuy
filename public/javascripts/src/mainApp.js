@@ -69,6 +69,10 @@ $routeProvider
     	templateUrl: 'partials/login.html' ,
     	controller : 'authController'
     })
+    .when('/signout' , {
+    	templateUrl: 'partials/login.html' ,
+    	controller : 'mainController'
+    })
 
     $locationProvider.html5Mode(false);
 });
@@ -80,9 +84,10 @@ $routeProvider
 
 app.controller('postController' , function($http ,$rootScope ,$resource, httpService, $scope,$location,$routeParams){
 	$scope.post = function(){
-	httpService.save( {text: $scope.text , created_by:$scope.created_by , created_at: Date.now()});
+        $scope.created_by=$rootScope.current_user;
+	httpService.save( {text: $scope.text , created_by: $scope.created_by , created_at: Date.now()});
 			$scope.text='';
-			$scope.created_by=$rootScope.current_user;
+			
 			$http.get('/api/posts').success(function(data){
 		$scope.posts =data;
 		});
@@ -106,27 +111,34 @@ app.controller('singleGetCtrl' ,function($http ,$scope, $routeParams){
  //The main controller
 app.controller('mainController' , function($http ,$scope,$resource, httpService,userService){
 	$scope.posts =httpService.query();
-	$scope.users = userService.query();
 
 	});
 //The User controller 
-app.controller('UserController' , function($http ,$scope){
+app.controller('UserController' , function($http ,$rootScope,$location,$scope){
 	//$scope.users =userService.query();
+    if($rootScope.authenticated===false){
+         $location.path('/signup');
+     }
 	$http.get('/api/users').success(function(data){
 		$scope.users =data;
-
+    
 	});
+   
 });
 //Single user getter
-app.controller('userGetCtrl' ,function($http ,$scope, $routeParams){
- 
+app.controller('userGetCtrl' ,function($http ,$scope,$rootScope,$location, $routeParams){
+   
+  
     $scope.id= $routeParams.id;
      console.log($scope.id);
      $http.get('/api/users/'+ $scope.id).success(function(data){
+         
      	$scope.User=data;
      	$scope.User.ShoppingInterest = data.ShoppingInterest;
-     	console.log(data);
-     });
+     	console.log(data);});
+     if($rootScope.authenticated===false){
+         $location.path('/signup');
+     }
  });
   
 //The Authentication controller
@@ -144,6 +156,8 @@ $scope.login = function(){
 		if(data.status=='success'){
 		$rootScope.authenticated=true;
         $rootScope.current_user= data.user.username;
+        $rootScope.current_userid=data.user._id;
+        
         $location.path('/home');
 
     }
@@ -159,10 +173,10 @@ $scope.login = function(){
 $scope.signup = function(){
     $http.post('auth/signup' ,$scope.user).success(function(data){
 
-      if( data.status== 'success'){
+      if(data.status=='success'){
       	$rootScope.authenticated = true;
       	$rootScope.current_user=data.user.username ;
-      	console.log(data.user.username);
+         $rootScope.current_userid=data.user._id;
       	$location.path('/home'); 
       	
       }

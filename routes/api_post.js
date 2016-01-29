@@ -9,6 +9,18 @@ var crypto=require('crypto');
 
 //The multer Storage configuration && File renaming using Crypto
 
+isAuthinticated = function(req , res , next){
+    if(req.Method==='GET'){
+     return next();      
+    }
+    if(req.isAuthenticated()){
+       return next();
+       console.log('passed');
+    }
+    res.redirect('/login');
+    
+};
+
 var storage = multer.diskStorage( { destination: function(req, file, cb) {
   cb(null, './photos/') }  ,  filename : function(req, file, cb) {
   crypto.pseudoRandomBytes (16, function (err, raw) {
@@ -28,7 +40,7 @@ app.get("/parag" , function(req , res){
 app.post('/api/posts', (function(req, res){
 
 		var post = new Post();
-		post.Text = req.body.Text;
+		post.text = req.body.text;
 		post.created_by = req.body.created_by;
 		post.save(function(err, post){
 			if (err){
@@ -51,8 +63,7 @@ app.post('/api/posts', (function(req, res){
 	//res.send(req.file.path);
 //});
 	app.get('/api/posts'  ,(function(req, res){
-
-		Post.find(function(err, posts){
+       Post.find(function(err, posts){
 			if(err){
 				return res.send(500, err);
 			}
