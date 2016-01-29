@@ -25,8 +25,8 @@ var  bCrypt = require('bcrypt-nodejs');
 
 /*Specifying The Route Paths*/
 
-var api = require('./routes/api_post');
-var users = require('./routes/user_profile_api');
+var api = require('./routes/main_route');
+var users = require('./routes/user_controller');
 var authentication = require('./routes/authentication_local')(passport);
 var passport_init = require('./passport/passport_init');
     passport_init(passport);
@@ -53,7 +53,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //SetTing the routes 
-app.use('/', api,users);
+app.use('/', api);
 //app.use('/users' , users)
 app.use('/auth' , authentication);
 //app.use('/users', users);

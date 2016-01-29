@@ -1,7 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
-var UserProfile = mongoose.model('UserProfile');
 
 
 exports.createPost  = function(req, res){
