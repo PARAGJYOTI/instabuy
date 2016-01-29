@@ -46,8 +46,10 @@ var UserProfile = mongoose.model('UserProfile');
 		User.ContactDetials.Email = req.body.Email;
 		User.Followings = req.body.Followings;
 		User.Location = req.body.Location;
-
-     User.save(function(err, User){
+     
+     User
+     .populate('Followings')
+     .save(function(err, User){
 
 			if(err){
 				return res.send(500, err);

@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var postSchema = new mongoose.Schema({
-	created_by: String, // {type : Schema.ObjectId },// ref:'UserProfile'},
+	created_by:{type : Schema.Types.ObjectId , ref:'UserProfile'},
 	
 	created_at: {type: Date, default: Date.now},
 	text: {type : String},

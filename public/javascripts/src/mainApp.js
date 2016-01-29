@@ -84,7 +84,7 @@ $routeProvider
 
 app.controller('postController' , function($http ,$rootScope ,$resource, httpService, $scope,$location,$routeParams){
 	$scope.post = function(){
-        $scope.created_by=$rootScope.current_user;
+        $scope.created_by=$rootScope.current_userid;
 	httpService.save( {text: $scope.text , created_by: $scope.created_by , created_at: Date.now()});
 			$scope.text='';
 			

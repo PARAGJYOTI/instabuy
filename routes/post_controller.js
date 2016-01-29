@@ -17,7 +17,9 @@ exports.createPost  = function(req, res){
 };
 
 exports.getAllPosts =function(req, res){
-       Post.find(function(err, posts){
+       Post.find()
+       .populate('created_by')
+       .exec(function(err, posts){
 			if(err){
 				return res.send(500, err);
 			}
@@ -26,7 +28,9 @@ exports.getAllPosts =function(req, res){
 	};
     
   exports.getPostById = function(req, res){
-		Post.findById(req.params.id, function(err, post){
+		Post.findById(req.params.id)
+        .populate('created_by')
+        .exec(function(err, post){
 			if(err)
 				res.send(err);
 			res.json(post);

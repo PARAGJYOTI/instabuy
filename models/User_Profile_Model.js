@@ -27,8 +27,8 @@ var UserProfileSchema = new Schema(
     WishLists : [{ type: Schema.ObjectId , ref:'Item' }],
     FavoriteFood : [String],
     Bio : String,
-    Followings:[{type: Schema.Types.ObjectId}],
-    Followers: [{type: Schema.Types.ObjectId}],
+    Followings:[{type: Schema.Types.ObjectId ,ref:'UserProfile'}],
+    Followers: [{type: Schema.Types.ObjectId , ref:'UserProfile'}],
 
   	Gender: String,
   	Age: Number,

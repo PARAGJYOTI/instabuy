@@ -6,7 +6,9 @@ var UserProfile = mongoose.model('UserProfile');
   exports.getAllUsers =function(req ,res){
 
 
-		   UserProfile.find(function(err, data){
+		   UserProfile.find()
+                      .populate('Followings' ,'Age')
+                      .exec(function(err, data){
 			if(err){
 				console.log("Database error");
 				res.send(err);
@@ -43,7 +45,7 @@ var UserProfile = mongoose.model('UserProfile');
 		User.Followings = req.body.Followings;
 		User.Location = req.body.Location;
 
-     User.save(function(err, User){
+         User.save(function(err, User){
 
 			if(err){
 				return res.send(500, err);
@@ -56,7 +58,9 @@ var UserProfile = mongoose.model('UserProfile');
  exports.getUserById = function(req ,res){
 
 
-		UserProfile.findById(req.params.id ,function(err, data){
+		UserProfile.findById(req.params.id)
+                   .populate('Followings')
+                   .exec(function(err, data){
 			if(err){
 				console.log("Database error");
 				res.send(err);
