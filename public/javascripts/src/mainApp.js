@@ -146,8 +146,17 @@ app.controller('userGetCtrl' ,function($http ,$scope,$rootScope,$location, $rout
 //login
 
 app.controller('authController' , function($rootScope, $scope ,$http , $location ){
-	$scope.user = {username: '', password: ''};
+	$scope.user = {username: '', password: '' , Gender:'' , DateOfBirth:''};
 	$scope.error_message = '';
+    $scope.user.Gender =['male' , 'female'];
+    
+    $scope.warning= function(){
+        if($scope.user.password&&$scope.user.password===$scope.user.repassword){
+            return true;
+            
+        }
+    }
+    $scope.message='Password  Matched!'
 
 
 $scope.login = function(){
@@ -169,7 +178,6 @@ $scope.login = function(){
 	});
   
 };
-
 $scope.signup = function(){
     $http.post('auth/signup' ,$scope.user).success(function(data){
 

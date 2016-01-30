@@ -1,8 +1,17 @@
 <div ng-controller='authController'> 
 <form class='form-auth'>
-	<input type='textbox' name='Username' ng-model='user.username'  placeholder='Username' class='form-control'><br>
+	<input type='textbox' name='user' ng-model='user.username'  placeholder='Username' class='form-control'><br>
 	 {{error_message}}
-	<input type='password' name='Password' ng-model='user.password' placeholder='password' class='form-control'><br>
-	<input type='submit' class='btn btn-success btn-block' ng-click='signup()' value='Sign up'>
+	<input type='password' name='Password' ng-model='user.password'  placeholder='Enter Password' class='form-control'><br>
+    <p class='pull right' ng-show='warning()'>{{message}}</p>
+    <input type='password' name='rePassword' ng-model='user.repassword' placeholder='Retype-password' class='form-control'><br>
+    <h4>Birthday :<h4>
+    <input type='Date' name='DateOfBirth' ng-model='user.DateOfBirth' class='form-control' ng-required><br>
+    <h4>Gender :<h4>
+    <select ng-model='user.Gender'  class='form-control'>
+        <option  value='Male'>Male</option>
+        <option value='FeMale'>Female</option>
+     </select>
+	<input type='submit' class='btn btn-success btn-block signup' ng-click='signup()' value='Sign up'>
 </form>
 </div>
