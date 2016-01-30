@@ -15,11 +15,18 @@ app.put('/api/posts/:id' , api_post.updatePost);
 app.delete('/api/posts/:id' , api_post.deletePost);
 
 //uSER Api rotes
+//create//
 app.post('/api/users' , api_user.createUser);
 app.post('/api/users/:id/addBio' , api_user.addBioDetails );
 app.post('/api/users/:id/addContactDetails' , api_user.addContactDetails );
 app.post('/api/users/:id/addJobDetails' , api_user.addJobDetails );
 app.post('/api/users/:id/addBillingAddr' , api_user.addBillingAddr );
+//update
+app.put('/api/users/:id/updateBio' , api_user.updateBioDetails );
+app.put('/api/users/:id/updateContactDetails' , api_user.updateContactDetails );
+app.put('/api/users/:id/updateJobDetails' , api_user.updateJobDetails );
+app.put('/api/users/:id/updateBillingAddr' , api_user.updateBillingAddr );
+//Getting all User info
 app.get('/api/users' , api_user.getAllUsers);
 app.get('/api/users/:id' , api_user.getUserById); 
 //app.put('/api/users/:id' , api_user.updateUser);

@@ -24,6 +24,23 @@ var UserProfile = mongoose.model('UserProfile');
 	       };
            
            
+  exports.getUserById = function(req ,res){
+
+
+		UserProfile.findById(req.params.id)
+                   .populate('Followings')
+                   .exec(function(err, data){
+			if(err){
+				console.log("Database error");
+				res.send(err);
+
+			}
+			//console.log(data);
+			  res.json(data);
+		});
+	};
+    
+           
 //  Creating user for signUp perpose
            
  exports.createUser =function(req ,res){
@@ -52,9 +69,9 @@ var UserProfile = mongoose.model('UserProfile');
       
 //   Add user billing Detials
       
-  exports.addBillingaddr =function(req,res){
+  exports.addBillingAddr =function(req,res){
       
-      UserProfile.findOne({id:req.params.id}, function(err, User){
+      UserProfile.findOne(req.params.id, function(err, User){
           if(err){
               console.log('error whille adding');
               
@@ -74,19 +91,65 @@ var UserProfile = mongoose.model('UserProfile');
         
       
   };
-//    Add User COntact detials
-
-  exports.addcontactDetails =function(req,res){
+  
+  exports.updateBillingAddr =function(req,res){
       
-      UserProfile.findOne({id:req.params.id}, function(err, User){
+      UserProfile.findOne(req.params.id, function(err, User){
           if(err){
               console.log('error whille adding');
               
           }
           
-        User.ContactDetials.MobileNo = req.body.MobileNo ;
+        User.Address = req.body.address;
+		User.ShippingAddress = req.body.ShippingAddress;
+		User.Location = req.body.Location;
+        
+        User.save(function(err,resData){
+            if(err){
+                console.log('error while saving the user data');
+            }
+            res.json(resData);
+        })
+      });
+        
+      
+  };
+  
+//    Add User COntact detials
+
+  exports.addContactDetails =function(req,res){
+      
+      UserProfile.findOne(req.params.id, function(err, User){
+          if(err){
+              console.log('error whille adding');
+              
+          }
+          
+        //User.ContactDetials.MobileNo = req.body.MobileNo ;
 		User.Country = req.body.Country;
-		User.ContactDetials.Email = req.body.Email;
+		//User.ContactDetials.Email = req.body.Email;
+        
+        User.save(function(err,resData){
+            if(err){
+                console.log('error while saving the user data');
+            }
+            res.json(resData);
+        })
+      });
+        
+      
+  };
+  exports.updateContactDetails =function(req,res){
+      
+      UserProfile.findOne(req.params.id, function(err, User){
+          if(err){
+              console.log('error whille adding');
+              
+          }
+          
+        //User.ContactDetials.MobileNo = req.body.MobileNo ;
+		User.Country = req.body.Country;
+		//User.ContactDetials.Email = req.body.Email;
         
         User.save(function(err,resData){
             if(err){
@@ -101,9 +164,35 @@ var UserProfile = mongoose.model('UserProfile');
   
 //   Add Bio details
 
-  exports.addbioDetails =function(req,res){
+  exports.addBioDetails =function(req,res){
       
-      UserProfile.findOne({id:req.params.id}, function(err, User){
+      UserProfile.findOne(req.params.id, function(err, User){
+          if(err){
+              console.log('error whille adding');
+              
+          }
+          
+        User.Age = req.body.Age;
+		User.Bio = req.body.Bio;
+		User.ShoppingInterest = req.body.ShoppingInterest;
+		User.FavoriteFood = req.body.FavoriteFood;
+		User.Followings = req.body.Followings;
+		User.Marritualstatus =req.body.Marritualstatus;
+		User.Interestedin = req.body.Interestedin;
+        
+        User.save(function(err,resData){
+            if(err){
+                console.log('error while saving the user data');
+            }
+            res.json(resData);
+        })
+      });
+        
+      
+  };
+  exports.updateBioDetails =function(req,res){
+      
+      UserProfile.findOne(req.params.id, function(err, User){
           if(err){
               console.log('error whille adding');
               
@@ -131,7 +220,32 @@ var UserProfile = mongoose.model('UserProfile');
 
 exports.addJobDetails =function(req,res){
       
-      UserProfile.findOne({id:req.params.id}, function(err, User){
+      UserProfile.findOne(req.params.id, function(err, User){
+          if(err){
+              console.log('error whille adding');
+              
+          }
+       
+        
+		User.Job.WorkingAt = req.body.WorkingAt ;
+		User.Job.Position = req.body.Position;
+		User.FinancialStatus = req.body.FinancialStatus;
+		User.LookingFor = req.body.LookingFor;
+        
+        User.save(function(err,resData){
+            if(err){
+                console.log('error while saving the user data');
+            }
+            res.json(resData);
+        })
+      });
+        
+      
+  };
+		
+exports.updateJobDetails =function(req,res){
+      
+      UserProfile.findOne(req.params.id, function(err, User){
           if(err){
               console.log('error whille adding');
               
@@ -157,22 +271,7 @@ exports.addJobDetails =function(req,res){
 	
         
         
- exports.getUserById = function(req ,res){
-
-
-		UserProfile.findById(req.params.id)
-                   .populate('Followings')
-                   .exec(function(err, data){
-			if(err){
-				console.log("Database error");
-				res.send(err);
-
-			}
-			//console.log(data);
-			  res.json(data);
-		});
-	};
-    
+ 
     
  
     

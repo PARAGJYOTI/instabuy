@@ -77,7 +77,12 @@ passport.use('signup' , new LocalStrategy({
    	   		   	var newUser = new UserProfile();                //instanciating the UserProfile Model as newUser
                        newUser.username = username ;
                        newUser.password = createHash(password);
-
+                       newUser.Name.FirstName = req.body.FirstName;
+                       newUser.Name.LatName = req.body.LastName;
+                       newUser.City = req.body.City;
+                       newUser.Gender = req.body.Gender;
+                       newUser.DateOfBirth =req.body.DateOfBirth;
+                    
                      newUser.save( function(err){
                         if (err){
                            console.log('Error while Saving new User data' + err);
