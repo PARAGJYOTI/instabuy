@@ -21,6 +21,9 @@ input , input:focus{
 	font-size: 18px;
 
 }
+.warn{
+    font-color:orange;
+}
 
 #name{
 	color:red;

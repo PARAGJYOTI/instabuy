@@ -153,11 +153,13 @@ app.controller('authController' , function($rootScope, $scope ,$http , $location
     $scope.warning= function(){
         if($scope.user.password&&$scope.user.password===$scope.user.repassword){
               $scope.message='Password  Matched!';
+              $scope.color= 'green';
             return true;
             
         }
         else if($scope.user.password && $scope.user.password.length <=8){
             $scope.message='Password Weak';
+            $scope.color= 'orange';
             return true;
         }
     };
