@@ -1,7 +1,7 @@
 <div class='wrapper'ng-controller='authController'> 
 <form class='form-auth col-offset-12'>
 	<input type='textbox' name='Username' ng-model='user.username'  placeholder='Username' class='form-control'><br>
-	 {{error_message}}
+	 <p class='warn'>{{error_message}}</p>
 	<input type='password' name='Password' ng-model='user.password' placeholder='password' class='form-control'><br>
 	<input type='submit' class='btn btn-block btn-danger pull-right' ng-submit ng-click='login()' value='Log In' >
 </form>

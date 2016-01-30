@@ -163,7 +163,12 @@ app.controller('authController' , function($rootScope, $scope ,$http , $location
             return true;
         }
     };
-
+//    $scope.required= function(){
+//        if($scope.user.DateOfBirth===null && $scope.submit()){
+//            $scope.reqmessage='Please tell us the Date Of Birth'
+//            return true;
+//        }
+//    }
 
 $scope.login = function(){
 
@@ -175,14 +180,14 @@ $scope.login = function(){
         
         $location.path('/home');
 
-    }
+    }  
+       
 
     	else{
-    		$scope.error_message = data.message ;
+    		$scope.error_message = data.message|| 'Please Enter a valid Username' ;
     	}
 
 	});
-  
 };
 $scope.signup = function(){
     $http.post('auth/signup' ,$scope.user).success(function(data){
@@ -194,8 +199,11 @@ $scope.signup = function(){
       	$location.path('/home'); 
       	
       }
+      else if(!$scope.user.username || !$scope.user.password){
+           $scope.error_message ='Please Fill Up The Fields';
+       }
       else{
-      	$scope.error_message=data.message;
+      	$scope.error_message=data.message|| 'Username Already Exists';
       }
 
     });
