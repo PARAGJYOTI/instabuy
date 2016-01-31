@@ -5,7 +5,20 @@ var UserProfile = mongoose.model('UserProfile');
 var app=express.Router();
 var api_post = require('./post_controller');
 var api_user =require('./user_controller');
+var api_photo = require('./file_controller');
+var multer=require('multer');
+var crypto =require('crypto');
 
+
+var storage = multer.diskStorage( { destination: function(req, file, cb) {
+  cb(null, './photos/') }  ,  filename : function(req, file, cb) {
+  crypto.pseudoRandomBytes (16, function (err, raw) {
+   cb(err, err ? undefined : raw.toString('hex') + Date.now() + '.jpg') ; 
+});
+ }
+});
+
+var uploading = multer({ storage :storage});
 //post api routes 
 
 app.post('/api/posts' , api_post.createPost);
@@ -32,4 +45,9 @@ app.get('/api/users/:id' , api_user.getUserById);
 //app.put('/api/users/:id' , api_user.updateUser);
 //app.delete('/api/users/:id', api_users.deleteUser);
 
+
+//File Uploads
+
+ app.post('/photos' , uploading.single('ProfilePic'), api_photo.uploadSingle);
+ app.post('/photos',uploading.any(), api_photo.uploadMultiple); 
 module.exports=app;

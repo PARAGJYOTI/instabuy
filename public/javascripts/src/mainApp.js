@@ -4,7 +4,7 @@ Dependecies: NgRoute ,ngResource , ng-File-UPload , ui-router
 
 */
 
-var app=angular.module('mainApp' , [ 'ngRoute', 'ngResource' ]).run(function($rootScope , $http ){
+var app=angular.module('mainApp' , [ 'ngRoute', ,'ngFileUpload','ngResource' ]).run(function($rootScope , $http ){
 	$rootScope.authenticated =false ;
 	$rootScope.current_user = 'Guest';
 
@@ -73,6 +73,10 @@ $routeProvider
     	templateUrl: 'partials/login.html' ,
     	controller : 'mainController'
     })
+     .when('/about' , {
+    	templateUrl: 'partials/fileUpload.html' ,
+    	controller : 'MyCtrl'
+    })
 
     $locationProvider.html5Mode(false);
 });
@@ -90,6 +94,10 @@ app.controller('postController' , function($http ,$rootScope ,$resource, httpSer
 			
 			$http.get('/api/posts').success(function(data){
 		$scope.posts =data;
+        console.log(data.created_by);
+        if(!data.created_by){
+            $scope.posts.created_by.username='Guest';
+        }
 		});
     
 			
@@ -217,30 +225,49 @@ $scope.signup = function(){
 //The file upload Controller
 
 
-app.controller('fileController'  , function($scope , Upload){
+// app.controller('fileController'  , function($scope , Upload){
 
-$scope.submit =function(){
-	if(form.file.$valid && $scope.file)
-	{
-		$scope.upload($scope.file);
-	}
-};
+// $scope.submit =function(){
+// 	if(form.file.$valid && $scope.file)
+// 	{
+// 		$scope.upload($scope.file);
+// 	}
+// };
 
-//upload file on select or drop
+// //upload file on select or drop
 
-$scope.upload=function(file){
-Upload.upload({
-	url:'/photos',
-	data: {file:file ,'username': $scope.username}
-}).then(function(resp){
-	console.log('success' + resp.config.data.file.name+ 'uploaded response :' +resp.data);
-},function(resp){
-	console.log('error status:'+ resp.status);
-},function(evt){
-	var progressPercentage =parseInt(100.0 *evt.loaded/evt.total);
-	console.log('progress :' + progressPercentage + '%' + evt.config.data.file.name);
-});
+// $scope.upload=function(file){
+// Upload.upload({
+// 	url:'/photos',
+// 	data: {file:file ,'username': $scope.username}
+// }).then(function(resp){
+// 	console.log('success' + resp.config.data.file.name+ 'uploaded response :' +resp.data);
+// },function(resp){
+// 	console.log('error status:'+ resp.status);
+// },function(evt){
+// 	var progressPercentage =parseInt(100.0 *evt.loaded/evt.total);
+// 	console.log('progress :' + progressPercentage + '%' + evt.config.data.file.name);
+// });
 
-};
-});
+// };
+// });
+app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    $scope.uploadPic = function(file) {
+    file.upload = Upload.upload({
+      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      data: {file: file, username: $scope.username},
+    });
 
+    file.upload.then(function (response) {
+      $timeout(function () {
+        file.result = response.data;
+      });
+    }, function (response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    }
+}]);

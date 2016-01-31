@@ -32,6 +32,18 @@ var uploading = multer({ storage :storage});
 /*app.get('/' , function(req ,res){
 	res.send("hiii");
 });*/
+app.get('/photos' , function(req ,res){
+	res.send(req.files);
+
+});
+
+
+
+
+    app.post('/photos' , uploading.single('parag'),  function(req, res){
+
+	res.send(req.file.path);
+});
 app.get("/parag" , function(req , res){
 	res.send("its only works");
 
@@ -50,18 +62,6 @@ app.post('/api/posts', (function(req, res){
 		});
 	})
 	);
-//app.get('/photos' , function(req ,res){
-	//res.send(req.files);
-
-//});
-
-
-
-
-    //app.post('/photos' , uploading.single('parag'),  function(req, res){
-
-	//res.send(req.file.path);
-//});
 	app.get('/api/posts'  ,(function(req, res){
        Post.find(function(err, posts){
 			if(err){
