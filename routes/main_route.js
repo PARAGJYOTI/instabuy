@@ -11,7 +11,7 @@ var crypto =require('crypto');
 
 
 var storage = multer.diskStorage( { destination: function(req, file, cb) {
-  cb(null, './photos/') }  ,  filename : function(req, file, cb) {
+  cb(null, './public/photos/') }  ,  filename : function(req, file, cb) {
   crypto.pseudoRandomBytes (16, function (err, raw) {
    cb(err, err ? undefined : raw.toString('hex') + Date.now() + '.jpg') ; 
 });
@@ -48,6 +48,6 @@ app.get('/api/users/:id' , api_user.getUserById);
 
 //File Uploads
 
- app.post('/photos' , uploading.single('ProfilePic'), api_photo.uploadSingle);
- app.post('/photos',uploading.any(), api_photo.uploadMultiple); 
+ app.post('/photos' , uploading.single('file'), api_photo.uploadSingle);
+ //app.post('/photos', uploading.array('file',2), api_photo.uploadMultiple); //not working...
 module.exports=app;

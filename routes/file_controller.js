@@ -1,17 +1,14 @@
 
  exports.uploadSingle=function(req, res){
-
-	res.send(req.file);
+     
+     
+     res.send(req.file);
+     
+ };
+// exports.uploadMultiple=function(req, res){
     
-};
-
-exports.uploadMultiple=function(err,req, res){
-    if(err){
-        res.send(err);
-    }
+//     console.log('multi UPload success')
+// 	res.json(req.files);
     
-    console.log('multi UPload success')
-	res.send(req.files);
-    
-};
+// };
 

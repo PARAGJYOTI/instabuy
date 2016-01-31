@@ -254,13 +254,15 @@ $scope.signup = function(){
 app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
     $scope.uploadPic = function(file) {
     file.upload = Upload.upload({
-      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-      data: {file: file, username: $scope.username},
+      url: 'http://localhost:3000/photos',
+      data: {file: file , username: $scope.username},
     });
 
     file.upload.then(function (response) {
       $timeout(function () {
         file.result = response.data;
+        $scope.filename=response.data.filename;
+        console.log($scope.filepath);
       });
     }, function (response) {
       if (response.status > 0)
