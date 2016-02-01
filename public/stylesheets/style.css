@@ -25,6 +25,21 @@ input , input:focus{
     position: relative;
     overflow: hidden;
 }
+.drop-box {
+    background: #f6edef;
+    border: 5px dashed #f7839e;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    padding-top: 85px;
+    margin: 10px;
+    font-family: Tahoma;
+    color:#333;
+    border-radius: 5px;
+}
+.dragover{
+    border: 5px dashed blue;
+}
 .thumb{
     max-width:30%;
     max-height:30%;

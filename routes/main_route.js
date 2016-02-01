@@ -29,7 +29,7 @@ app.get('/api/posts/:id' , api_post.getPostById);
 app.put('/api/posts/:id' , api_post.updatePost);
 app.delete('/api/posts/:id' , api_post.deletePost);
 
-//uSER Api rotes
+//uSER Api routes
 //create//
 app.post('/api/users' , api_user.createUser);
 app.post('/api/users/:id/addBio' , api_user.addBioDetails );
@@ -51,7 +51,7 @@ app.get('/api/users/:id' , api_user.getUserById);
 //File Uploads
 
  app.post('/photos' , uploading.single('file'), api_photo.uploadSingle);
- app.post('/photos/multiple', uploading.array('files',4), api_photo.uploadMultiple); //not working...
+ app.post('/photos/multiple', uploading.array('files',4), api_photo.uploadMultiple);
 
 
 // Items
