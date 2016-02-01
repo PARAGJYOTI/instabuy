@@ -17,9 +17,11 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 require('./models/User_Profile_Model');
 require('./models/Post_Model');
+require('./models/Store_Item_Model')
 var UserProfile = mongoose.model('UserProfile');
 mongoose.connect('mongodb://127.0.0.1:27017/test');
 var Post = mongoose.model('Post');
+var Item = mongoose.model('Item');
 var crypto = require('crypto');
 var  bCrypt = require('bcrypt-nodejs');
 

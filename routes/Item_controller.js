@@ -1,6 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Item = mongoose.model('Item');
+var ItemConstructor = mongoose.model('Item');
           
 //  All logics for getting Item details goes here
 //  Getalluser
@@ -10,7 +10,7 @@ var Item = mongoose.model('Item');
    exports.getAllItems =function(req ,res){
 
 
-		   Item.find()
+		   ItemConstructor.find()
                       .populate('SuperCreator Reviewers')
                       .exec(function(err, data){
 			if(err){
@@ -27,8 +27,8 @@ var Item = mongoose.model('Item');
   exports.getItemByIdd= function(req ,res){
 
 
-		Item.findById(req.params.id)
-                   .populate('Followings')
+		ItemConstructor.findById(req.params.id)
+                   .populate('SuperCreator Reviewers')
                    .exec(function(err, data){
 			if(err){
 				console.log("Database error");
@@ -44,13 +44,17 @@ var Item = mongoose.model('Item');
 //  Creating user for signUp perpose
            
  exports.createItem =function(req ,res){
-		var Item = new Item();
+		var Item = new ItemConstructor();
 	  //user detials from form 
-		Item.Name.Firstname = req.body.Firstname;
-		Item.Name.Lastname = req.body.Lastname;
-		Item.City = req.body.City;
-	    Item.Gender =req.body.Gender;
-		Item.DateOfBirth = req.body.DateOfBirth;
+		Item.ItemName=req.body.ItemName;
+        Item.Model=req.body.Model;
+        Item.Description=req.body.Description;
+        Item.SuperCreator=req.body.SuperCreator;
+        Item.Price = req.body.Price;
+        Item.hasOffer = req.body.hasOffer;
+        Item.Offer = req.body.Offer;
+        Item.Menufacturer=req.body.Menufacturer;
+        Item.SuperCreator =req.body.SuperCreator;
 		
 
          Item.save(function(err, Item){
@@ -63,210 +67,10 @@ var Item = mongoose.model('Item');
 		});
  };
  
- 
-//  All additional Item details Goes down Here
-      
-      
-//   Add user billing Detials
-      
-  exports.addBillingAddr =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-          
-        Item.Address = req.body.address;
-		Item.ShippingAddress = req.body.ShippingAddress;
-		Item.Location = req.body.Location;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
-  
-  exports.updateBillingAddr =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-          
-        Item.Address = req.body.address;
-		Item.ShippingAddress = req.body.ShippingAddress;
-		Item.Location = req.body.Location;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
-  
-//    Add Item COntact detials
 
-  exports.addContactDetails =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-          
-        //Item.ContactDetials.MobileNo = req.body.MobileNo ;
-		Item.Country = req.body.Country;
-		//Item.ContactDetials.Email = req.body.Email;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
-  exports.updateContactDetails =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-          
-        //Item.ContactDetials.MobileNo = req.body.MobileNo ;
-		Item.Country = req.body.Country;
-		//Item.ContactDetials.Email = req.body.Email;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
   
-//   Add Bio details
 
-  exports.addBioDetails =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-          
-        Item.Age = req.body.Age;
-		Item.Bio = req.body.Bio;
-		Item.ShoppingInterest = req.body.ShoppingInterest;
-		Item.FavoriteFood = req.body.FavoriteFood;
-		Item.Followings = req.body.Followings;
-		Item.Marritualstatus =req.body.Marritualstatus;
-		Item.Interestedin = req.body.Interestedin;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
-  exports.updateBioDetails =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-          
-        Item.Age = req.body.Age;
-		Item.Bio = req.body.Bio;
-		Item.ShoppingInterest = req.body.ShoppingInterest;
-		Item.FavoriteFood = req.body.FavoriteFood;
-		Item.Followings = req.body.Followings;
-		Item.Marritualstatus =req.body.Marritualstatus;
-		Item.Interestedin = req.body.Interestedin;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
-//   Add user Job Details
-
-exports.addJobDetails =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-       
-        
-		Item.Job.WorkingAt = req.body.WorkingAt ;
-		Item.Job.Position = req.body.Position;
-		Item.FinancialStatus = req.body.FinancialStatus;
-		Item.LookingFor = req.body.LookingFor;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
-		
-exports.updateJobDetails =function(req,res){
-      
-      Item.findOne(req.params.id, function(err, Item){
-          if(err){
-              console.log('error whille adding');
-              
-          }
-       
-        
-		Item.Job.WorkingAt = req.body.WorkingAt ;
-		Item.Job.Position = req.body.Position;
-		Item.FinancialStatus = req.body.FinancialStatus;
-		Item.LookingFor = req.body.LookingFor;
-        
-        Item.save(function(err,resData){
-            if(err){
-                console.log('error while saving the user data');
-            }
-            res.json(resData);
-        })
-      });
-        
-      
-  };
+  
 		
 	
         

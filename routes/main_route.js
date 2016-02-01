@@ -2,10 +2,12 @@ var express = require('express');
 var mongoose= require('mongoose');
 var Post = mongoose.model('Post');
 var UserProfile = mongoose.model('UserProfile');
+var ItemConstructor = mongoose.model('Item');
 var app=express.Router();
 var api_post = require('./post_controller');
 var api_user =require('./user_controller');
 var api_photo = require('./file_controller');
+var api_item = require('./item_controller');
 var multer=require('multer');
 var crypto =require('crypto');
 
@@ -50,4 +52,11 @@ app.get('/api/users/:id' , api_user.getUserById);
 
  app.post('/photos' , uploading.single('file'), api_photo.uploadSingle);
  app.post('/photos/multiple', uploading.array('files',4), api_photo.uploadMultiple); //not working...
+
+
+// Items
+
+app.post('/api/Items/CreateItem' , api_item.createItem);
+app.get('/api/Items', api_item.getAllItems); 
+
 module.exports=app;

@@ -5,15 +5,16 @@
 
 */
 var mongoose = require('mongoose');
-var Schema= mongoose.Schema();
+var Schema= mongoose.Schema;
 
 var ItemSchema =  new Schema({
 	ItemName : String,
 	Model : String ,
 	Description : [String],
-    SuperCreator:{ type: Schema.Types.ObjectId , ref : 'UserProfile'},
+    SuperCreator :  { type : Schema.Types.ObjectId , ref : 'UserProfile'},
 	Price : Number ,
-	Offer : {type : Number , defalut: null},
+	hasOffer : {type : Boolean , defalut: null},
+    Offer : {type: Number},
 	Reviews : [{ UserReviews : String , Reviewer: { type: Schema.Types.ObjectId , ref : 'UserProfile'}},
 				{StoreReviews : String , Reviewer: {type : Schema.Types.ObjectId , ref : 'StoreProfile'}}],
 	CurrentStockedItem : Number,
