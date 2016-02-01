@@ -262,7 +262,7 @@ app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Uplo
       $timeout(function () {
         file.result = response.data;
         $scope.filename=response.data.filename;
-        console.log($scope.filepath);
+        console.log(response.data);
       });
     }, function (response) {
       if (response.status > 0)

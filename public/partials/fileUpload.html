@@ -1,5 +1,5 @@
-<div class='container'>
-  <form name="myForm" ng-controller='MyCtrl'>
+<div class='container'  ng-controller='MyCtrl'>
+  <form name="myForm" >
     <fieldset>
       <legend>Upload on form submit</legend>
       Username:
@@ -7,7 +7,7 @@
       <i ng-show="myForm.userName.$error.required" class='warn'>*required</i>
       <br>Photo:
       
-      <div style='position:relative;'><span class='btn btn-primary'>Browse..<input type="file"  style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'               ngf-select ng-model="picFile"  name="file"   
+      <div style='position:relative;'><span class='btn btn-primary'>Browse..<input type="file"  style='position:absolute;z-index:3;top:0;left:0;line-height:3;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;'               ngf-select ng-model="picFile"  name="file"   
              accept="image/*" ngf-max-size="2MB" required
              ngf-model-invalid="errorFiles"></span></div>
       <i ng-show="myForm.file.$error.required">*required</i><br>
@@ -26,4 +26,5 @@
     </fieldset>
     <br>
   </form>
+  <div style='float:left;'><img width='50%' height='50%' src='../photos/{{filename}}'></div>
   </div>

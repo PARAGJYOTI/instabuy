@@ -10,18 +10,19 @@ var Schema= mongoose.Schema();
 var ItemSchema =  new Schema({
 	ItemName : String,
 	Model : String ,
-	Description : [Description],
-	Price : Number ;
-	Offer : {type : Number , defalut: Null}
-	Reviews : [{ UserReviews : String , { type: Schema.ObjectId , ref : 'UserProfile'},
-				StoreReviews : String , {type : Schema.ObjectId , ref : 'StoreProfile'}],
+	Description : [String],
+    SuperCreator:{ type: Schema.Types.ObjectId , ref : 'UserProfile'},
+	Price : Number ,
+	Offer : {type : Number , defalut: null},
+	Reviews : [{ UserReviews : String , Reviewer: { type: Schema.Types.ObjectId , ref : 'UserProfile'}},
+				{StoreReviews : String , Reviewer: {type : Schema.Types.ObjectId , ref : 'StoreProfile'}}],
 	CurrentStockedItem : Number,
 	Weight : Number ,
 	Dimention:{ length : Number, Breadth: Number , Height : Number},
 	Menufacturer : String, 
 	Brand : String,
-	Catagroy : [Catagory],
-	ImagePath : {MainImage : String , AltImagePath = [AltImagePath]},
+	Catagroy : [String],
+	ImagePath : {MainImage : String , AltImagePath : [String]},
 	VideoPath : String ,
 	WishListAdds: Number 
 

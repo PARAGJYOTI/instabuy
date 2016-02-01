@@ -5,10 +5,10 @@
      res.send(req.file);
      
  };
-// exports.uploadMultiple=function(req, res){
+exports.uploadMultiple=function(req, res){
     
-//     console.log('multi UPload success')
-// 	res.json(req.files);
+    console.log('multi UPload success')
+	res.send(req.files);
     
-// };
+};
 
