@@ -4,6 +4,8 @@ body {
     height: 100%;
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
  }
+ 
+ 
 input , input:focus{
 	border:none;
 	outline:none;
@@ -12,6 +14,37 @@ input , input:focus{
     margin-top:20px;
     width:100%;
 }
+a {
+    color: #FC7777;
+}
+.huffle:hover{
+    border-color: #3b07a6;
+    
+}
+
+ .col1{
+     
+     background-color: #2B053A;
+ }
+ .col2{
+     
+     background-color: #fafafa;
+ }
+ .col3{
+     
+     background-color: #F7BA20;
+     
+ }
+ .col4{
+     
+     background-color: #29243E;
+     
+ }
+ .col5{
+     
+     background-color: #1693A5;
+     
+ }
 #sign{
 
 	position:fixed;
@@ -26,17 +59,22 @@ input , input:focus{
     overflow: hidden;
 }
 .drop-box {
-    background: #f6edef;
-    border: 5px dashed #f7839e;
-    width: 200px;
-    height: 200px;
+    background: #3E6185;
+    border :1px solid #dfdfdf;
+    width: 100%;
+    height: 240px;
     text-align: center;
     padding-top: 85px;
-    margin: 10px;
+    
     font-family: Tahoma;
     color:#333;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
+.nav-p{
+    background-color: #5B2D45;
+}
+;
 .dragover{
     border: 5px dashed blue;
 }
@@ -65,12 +103,7 @@ input , input:focus{
 
 #name{
 	color:red;
-	font
 
-
-}
-a{
-  color: #634c52;
 }
 h1 {
 	color : #f7839e ;
@@ -83,12 +116,16 @@ h1 {
 .success{
     color:green;
 }
-
+.jumbo-large{
+    margin-top:-30px;
+    padding-left: 30px;
+    background-color: #FC7777;
+}
 .indi{
 
 	width:100%; 
 	min-height: 450px;
-	margin-top: 60px;
+	
 	height:80px;
 	background-color: #fdd5d0;
 	border-radius: 5px;

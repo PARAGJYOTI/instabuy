@@ -1,10 +1,14 @@
-<div class="jumbotron jumbo-large">
+
+ <div class="jumbotron jumbo-large col-md-12">
   <h2>Profile of  | {{User.username}}<h2>
     
-  </div>
-</div><div ng-controller='userGetCtrl'>
+  
+ </div>
+<div ng-controller='userGetCtrl'>
  <div  class='container'>
-	<div class='col-md-offset col-md-8'>
+     
+	<div class=' col-md-6'>
+        <div class='row'>
 		<div class='indi'>
 		<h4>USERNAME : {{User.Name.Firstname}} {{User.Name.Lastname}}<h4>
 					
@@ -20,10 +24,26 @@
 						<div>ShoppingInterest<span>{{User.ShoppingInterest}}</span></div>
 						<div>Followings<a href='#/users/{{User.Followings[0]}}'<span>{{User.Followings[0]}}</span></a></div>
 				 	</div>
+                     </div>
 						 	
 						 		
        </div>
                          
 </div>
+
+  <div class='container'>
+<div class="row">
+
+<div class="thumbnail huffle">
+  <div class="col-xs-3">  
+<div class='drop-box' ng-hide='picFile.result' ngf-select  ngf-drop ng-model="picFile"  name="file"   
+             accept="image/*" ngf-max-size="2MB" required
+             ngf-model-invalid="errorFiles">
+</div><hr>
+<button class='btn btn-primary'>Read More</button><hr>
 </div>
 </div>
+</div>
+  </div>
+  </div>
+  </div>

@@ -27,16 +27,16 @@ var UserProfile = mongoose.model('UserProfile');
   exports.getUserById = function(req ,res){
 
 
-		UserProfile.findById(req.params.id)
-                   .populate('Followings')
-                   .exec(function(err, data){
+		UserProfile.findById(req.params.id
+                   /*.populate('Followings')
+                   .exec(*/ , function(err, data){
 			if(err){
 				console.log("Database error");
 				res.send(err);
 
 			}
 			//console.log(data);
-			  res.json(data);
+			  res.send(data);
 		});
 	};
     
@@ -220,7 +220,7 @@ var UserProfile = mongoose.model('UserProfile');
 
 exports.addJobDetails =function(req,res){
       
-      UserProfile.findOne(req.params.id, function(err, User){
+      UserProfile.findById(req.params.id, function(err, User){
           if(err){
               console.log('error whille adding');
               
@@ -269,6 +269,35 @@ exports.updateJobDetails =function(req,res){
   };
 		
 	
+  //Upload Profile and Other Images//
+  
+  
+ exports.addProfilePic  = function(req, res){
+     UserProfile.findById(req.params.id , function(err, user){
+         user.ProfilePic= req.file.filename;
+         if(err){
+             res.send(500,err);
+             console.log('err' + err +'could not  write to image path');
+         }
+         user.save(function(err,data){
+             if(err){
+                 res.send(err);
+                 console.log('couldnot save user profilepic');
+             }
+             res.json(data);
+             console.log(res.file);
+         });
+     });
+     
+ };
+exports.uploadMultiple=function(req, res){
+    
+    console.log('multi UPload success')
+	res.send(req.files);
+    
+};
+
+
         
         
  

@@ -9,6 +9,8 @@ var UserProfileSchema = new Schema(
 
     username :String,
     password :String,
+    ProfilePic: String,
+    CoverPic: String,
   	Name :{
   		Firstname: String,
   		Lastname : String

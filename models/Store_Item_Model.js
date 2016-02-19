@@ -25,7 +25,9 @@ var ItemSchema =  new Schema({
 	Catagroy : [String],
 	ImagePath : {MainImage : String , AltImagePath : [String]},
 	VideoPath : String ,
-	WishListAdds: Number 
+	WishListAdds: Number ,
+    Likes: Number,
+    Clones: Number
 
 }); 
 mongoose.model('Item' , ItemSchema);

@@ -10,7 +10,10 @@ var api_photo = require('./file_controller');
 var api_item = require('./item_controller');
 var multer=require('multer');
 var crypto =require('crypto');
-
+var passport=require('passport')
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 var storage = multer.diskStorage( { destination: function(req, file, cb) {
   cb(null, './public/photos/') }  ,  filename : function(req, file, cb) {
@@ -22,6 +25,7 @@ var storage = multer.diskStorage( { destination: function(req, file, cb) {
 
 var uploading = multer({ storage :storage});
 //post api routes 
+   
 
 app.post('/api/posts' , api_post.createPost);
 app.get('/api/posts' , api_post.getAllPosts);
@@ -36,6 +40,8 @@ app.post('/api/users/:id/addBio' , api_user.addBioDetails );
 app.post('/api/users/:id/addContactDetails' , api_user.addContactDetails );
 app.post('/api/users/:id/addJobDetails' , api_user.addJobDetails );
 app.post('/api/users/:id/addBillingAddr' , api_user.addBillingAddr );
+app.post('/api/users/:id/addProfilePic' , uploading.single('ProfilePic'), api_user.addProfilePic);
+//app.post('/api/users/:id/addNewImage', uploading.array('UploadedPhotos',3), api_user.addNewImage);
 //update
 app.put('/api/users/:id/updateBio' , api_user.updateBioDetails );
 app.put('/api/users/:id/updateContactDetails' , api_user.updateContactDetails );
@@ -49,8 +55,7 @@ app.get('/api/users/:id' , api_user.getUserById);
 
 
 //File Uploads
-
- app.post('/photos' , uploading.single('file'), api_photo.uploadSingle);
+app.post('./photos' , uploading.single('file') , api_photo.uploadSingle);
  app.post('/photos/multiple', uploading.array('files',4), api_photo.uploadMultiple);
 
 
