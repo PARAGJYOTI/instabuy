@@ -32,6 +32,7 @@ app.get('/api/posts' , api_post.getAllPosts);
 app.get('/api/posts/:id' , api_post.getPostById);
 app.put('/api/posts/:id' , api_post.updatePost);
 app.delete('/api/posts/:id' , api_post.deletePost);
+app.post('/api/posts/search',api_post.searchpost);
 
 //uSER Api routes
 //create//

@@ -102,6 +102,18 @@ app.controller('postController' , function($http ,$rootScope ,$resource, httpSer
     
 			
 		};
+        
+     $scope.searchpost=function(){
+         
+            
+       $http.post('/api/posts/search', {text:$scope.post.search}).success(function(data){
+           $scope.posts=data;
+           console.log($scope.posts);
+           
+           
+       })
+     
+     }
     	
      });
 /*controller for getting only one post*/

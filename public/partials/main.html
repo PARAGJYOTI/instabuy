@@ -2,14 +2,16 @@
     <div  ng-controller='postController' class='row'>
 		<div  class='col-md-offset'>
 				<div >
-
+                              
 							 <textarea rows='4' class='form-control' placeholder='Tell your Story!' ng-model='text'></textarea>
 								<input type='submit'value='Post'  class='btn submit-btn btn-primery pull-right' ng-click='post()'></br><small class="pull-right">Remaining Characters:{{remaining()}}</small></br></br>
 				</div> 
 						    
-						    
-						        
+						    <div class='col-md-4'>
+						        <input type='text' placeholder="search here" class='form-control' ng-model='post.search' ng-change='searchpost()'></input></br>
+						    </div> </br>
 					<div>logged in as <a href="#/users/{{current_userid}}">{{current_user}}<a></div>
+                    
 				 <div class='post' ng-repeat='post in posts |orderBy :"created_at":true 'ng-class-even="'even'" ng-class-odd="'odd'"> <div> <a href="#/posts/{{post._id}}"><h4>{{post.text}}<h4></a>
 							<small>posted by
 						    	       <a href='#/users/{{post.created_by._id}}' >@ {{post.created_by.username}}</a></small>

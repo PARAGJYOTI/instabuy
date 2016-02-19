@@ -24,6 +24,9 @@ var UserProfile = mongoose.model('UserProfile');
 	       };
            
            
+           
+           
+           
   exports.getUserById = function(req ,res){
 
 

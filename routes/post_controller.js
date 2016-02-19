@@ -18,6 +18,7 @@ exports.createPost  = function(req, res){
 		
 };
 
+
 exports.getAllPosts =function(req, res,next){
        Post.find()
        .populate('created_by')
@@ -33,6 +34,14 @@ exports.getAllPosts =function(req, res,next){
 		Post.findById(req.params.id)
         .populate('created_by')
         .exec(function(err, post){
+			if(err)
+				res.send(err);
+			res.json(post);
+		});
+	}; 
+    
+    exports.searchpost = function(req, res){
+		Post.find({text:req.body.text} ,function(err, post){
 			if(err)
 				res.send(err);
 			res.json(post);
